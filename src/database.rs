@@ -69,6 +69,18 @@ pub struct MemoryDB {
     db: HashMap<Hash, Vec<u8>>,
 }
 
+impl MemoryDB {
+    pub fn inner(&self) -> &HashMap<Hash, Vec<u8>> {
+        &self.db
+    }
+
+    pub fn from_existing(db: HashMap<Hash, Vec<u8>>) -> Self {
+        Self {
+            db,
+        }
+    }
+}
+
 impl Database for MemoryDB {
     fn new(_dbname: &str) -> Self {
         MemoryDB { db: HashMap::new() }

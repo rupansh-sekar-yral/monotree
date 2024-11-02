@@ -26,6 +26,13 @@ where
         Monotree { db, hasher }
     }
 
+    pub fn from_existing(db: D) -> Self {
+        Self {
+            db,
+            hasher: Hasher::new(),
+        }
+    }
+
     /// Insert key-leaf entry into the `monotree`. Returns a new root hash.
     pub fn insert(&mut self, root: Option<&Hash>, key: &Hash, leaf: &Hash) -> Result<Option<Hash>> {
         match root {
@@ -234,6 +241,14 @@ where
                 }
             }
         }
+    }
+
+    pub fn database(&self) -> &D {
+        &self.db
+    }
+
+    pub fn database_mut(&mut self) -> &mut D {
+        &mut self.db
     }
 }
 
